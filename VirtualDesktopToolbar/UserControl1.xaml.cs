@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using WindowsDesktop;
 
 namespace VirtualDesktopToolbar
@@ -208,7 +209,8 @@ namespace VirtualDesktopToolbar
                         Width = TaskbarHeight / rowCount
                     };
                     button.Tag = desktop.Id;
-                    SetBackgroundBinding(button);
+                    SetBindingByDesktopId(button, Button.BackgroundProperty, SystemColors.ActiveCaptionColor, Colors.Black);
+                    SetBindingByDesktopId(button, Button.ForegroundProperty, SystemColors.ActiveCaptionTextColor, Colors.White);
                     button.Click += Button_Click;
                     pnlButtonContainer.Children.Add(button);
                     Options.HorizontalSize.Width += (int)button.Width;
@@ -225,19 +227,21 @@ namespace VirtualDesktopToolbar
             }
         }
 
-        private void SetBackgroundBinding(Button button)
+        private void SetBindingByDesktopId(Button button, DependencyProperty dependencyProperty, Color activeColor, Color inActiveColor)
         {
-            //Background="{Binding Path=NurseOut,Converter={StaticResource int2color}}"
-            Binding backgroundBinding = new Binding
+            SolidColorBrush _activeBrush = new SolidColorBrush(activeColor);
+            SolidColorBrush _inActiveBrush = new SolidColorBrush(inActiveColor);
+
+            Binding binding = new Binding
             {
                 Source = this,
                 Path = new PropertyPath(nameof(CurrentDesktopId)),
                 ConverterParameter = button.Tag,
                 Mode = BindingMode.TwoWay,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                Converter = new SelectedButtonBackgroundByDesktopIdConverter()
+                Converter = new BrushByDesktopIdConverter(_activeBrush, _inActiveBrush)
             };
-            BindingOperations.SetBinding(button, Button.BackgroundProperty, backgroundBinding);
+            BindingOperations.SetBinding(button, dependencyProperty, binding);
 
         }
 
