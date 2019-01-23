@@ -1,0 +1,33 @@
+﻿<deskband:CSDeskBandWpf x:Class="VirtualDesktopToolbar.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VirtualDesktopToolbar"
+             xmlns:deskband="clr-namespace:CSDeskBand.Wpf;assembly=CSDeskBand.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Foreground="White" Background="Black" Loaded="UserControl1_Loaded" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}">
+    <WrapPanel x:Name="pnlButtonContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="{Binding WrapPanelOrientation}">
+        <WrapPanel.Resources>
+           <Style TargetType="Button">
+                <Setter Property="Background" Value="Black" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+        </WrapPanel.Resources>
+        <Button Content="1" Width="50" Height="50"></Button>
+        <Button Content="2" Width="50" Height="50"></Button>
+        <Button Content="3" Width="50" Height="50"></Button>
+        <Button Content="4" Width="50" Height="50"></Button>
+        <Button Content="5" Width="50" Height="50"></Button>
+        <Button Content="6" Width="50" Height="50"></Button>
+        <Button Content="7" Width="50" Height="50"></Button>
+        <Button Content="8" Width="50" Height="50"></Button>
+        <Button Content="9" Width="50" Height="50"></Button>
+        <Button Content="10" Width="50" Height="50"></Button>
+    </WrapPanel>
+</deskband:CSDeskBandWpf>
